@@ -7,7 +7,7 @@ Metadata:
     Description: Send CloudTrail logs from S3 bucket to Coralogix. 
     Author: Coralogix
     SpdxLicenseId: Apache-2.0
-    LicenseUrl: LICENSE
+    LicenseUrl: LICENSE 
     ReadmeUrl: README.md
     Labels:
       - coralogix
