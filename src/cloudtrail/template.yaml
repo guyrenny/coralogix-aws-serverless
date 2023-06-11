@@ -304,3 +304,5 @@ Resources:
           - IsSsmEnabled
           - !Ref LambdaFunctionSSM.DestinationTopic
           - !Ref LambdaFunction.DestinationTopic
+
+          
