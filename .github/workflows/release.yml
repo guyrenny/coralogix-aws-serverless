@@ -52,6 +52,7 @@ jobs:
         run: |
           export PACKAGES=$(git diff --name-only --diff-filter=d ${{ github.event.pull_request.base.sha || 'origin/master' }} ${{ github.sha }} src/ | xargs -n1 dirname | sed -r 's/src\/([^\/]+).*$/src\/\1/g' | xargs -n1 basename | sort | uniq | jq -rcnR '[inputs]')
           echo "::set-output name=packages::$PACKAGES"
+          echo $PACKAGES ; $packages
 
   validate:
     name: Validate
