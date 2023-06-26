@@ -29,8 +29,6 @@ jobs:
         with:
           name: Change-file
           path: src/s3/template.yaml
-      - name: ls
-        run: ls
           
       - name: Checkout Destination Repository
         uses: actions/checkout@v2
@@ -47,9 +45,6 @@ jobs:
         env:
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
         run: |
-          echo  ${{ env.packages }}
-          mkdir -p modules/test{1,2}
-          cp ${{ env.packages }} .
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git checkout main
