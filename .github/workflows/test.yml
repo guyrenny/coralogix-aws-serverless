@@ -5,7 +5,8 @@ on:
     types: [opened, synchronize]
     branches: [master, main]
     paths:
-      - "src/**"
+      - "src/**/template.*"
+      - "src/**/README.md"
      
 jobs:
   check:
