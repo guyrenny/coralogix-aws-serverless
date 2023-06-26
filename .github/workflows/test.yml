@@ -47,7 +47,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git checkout main
+          git checkout master
           git pull
           git add .
           git commit -m "Copy file from source repository"
@@ -56,6 +56,6 @@ jobs:
       - name: Merge Pull Request
         uses: repo-sync/pull-request@v2
         with:
-          sourceBranch: main
-          destinationBranch: main
+          sourceBranch: master
+          destinationBranch: master
           githubToken: ${{ secrets.DESTINATION_REPO_TOKEN }}
