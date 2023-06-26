@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Change-file
-          path: src/${{ env.packages }}/template.yaml
+          path: src/${{ fromJSON(env.packages) }}/template.yaml
           
       - name: Checkout Destination Repository
         uses: actions/checkout@v2
