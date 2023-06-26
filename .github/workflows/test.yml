@@ -1,0 +1,66 @@
+name: Terraform Testing
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches: [master, main]
+     
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest 
+    outputs: 
+      packages: ${{ env.packages }} 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Get changed packages
+        id: get-changed-packages
+        run: |
+          export PACKAGES=$(git diff --name-only --diff-filter=d ${{ github.event.pull_request.base.sha || 'origin/master' }} ${{ github.sha }} modules/ | xargs -n1 dirname | sed -r 's/modules\/([^\/]+).*$/modules\/\1/g' | xargs -n1 basename | sort | uniq | jq -rcnR '[inputs]')
+          echo "packages=$PACKAGES" >> $GITHUB_ENV
+      
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v3
+        with:
+          name: Change-file
+          path: src/s3/template.yaml
+      - name: ls
+        run: ls
+          
+      - name: Checkout Destination Repository
+        uses: actions/checkout@v2
+        with:
+          repository: guyrenny/cloudformation-coralogix-aws
+          token: ${{ secrets.DESTINATION_REPO_TOKEN }}
+          
+      - name: Download math result for job 1
+        uses: actions/download-artifact@v3
+        with:
+          name: Change-file
+          
+      - name: Commit and Push Changes 
+        env:
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+        run: |
+          echo  ${{ env.packages }}
+          mkdir -p modules/test{1,2}
+          cp ${{ env.packages }} .
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git checkout main
+          git pull
+          git add .
+          git commit -m "Copy file from source repository"
+          git push origin HEAD:main -f
+          
+      - name: Merge Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          sourceBranch: main
+          destinationBranch: main
+          githubToken: ${{ secrets.DESTINATION_REPO_TOKEN }}
