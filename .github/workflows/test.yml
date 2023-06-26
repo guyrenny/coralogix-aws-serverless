@@ -25,12 +25,25 @@ jobs:
         run: |
           export PACKAGES=$(git diff --name-only --diff-filter=d ${{ github.event.pull_request.base.sha || 'origin/master' }} ${{ github.sha }} src/ | xargs -n1 dirname | sed -r 's/src\/([^\/]+).*$/src\/\1/g' | xargs -n1 basename | sort | uniq | jq -rcnR '[inputs]')
           echo "packages=$PACKAGES" >> $GITHUB_ENV
+          
+          
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    needs: check
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.check.outputs.packages) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v3
         with:
           name: Change-file
-          path: src/${{ fromJSON(env.packages) }}/template.yaml
+          path: src/${{ matrix.package }}/template.yaml
           
       - name: Checkout Destination Repository
         uses: actions/checkout@v2
