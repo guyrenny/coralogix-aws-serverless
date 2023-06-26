@@ -4,6 +4,8 @@ on:
   pull_request:
     types: [opened, synchronize]
     branches: [master, main]
+    paths:
+      - "src/**"
      
 jobs:
   check:
@@ -21,7 +23,7 @@ jobs:
       - name: Get changed packages
         id: get-changed-packages
         run: |
-          export PACKAGES=$(git diff --name-only --diff-filter=d ${{ github.event.pull_request.base.sha || 'origin/master' }} ${{ github.sha }} modules/ | xargs -n1 dirname | sed -r 's/modules\/([^\/]+).*$/modules\/\1/g' | xargs -n1 basename | sort | uniq | jq -rcnR '[inputs]')
+          export PACKAGES=$(git diff --name-only --diff-filter=d ${{ github.event.pull_request.base.sha || 'origin/master' }} ${{ github.sha }} src/ | xargs -n1 dirname | sed -r 's/src\/([^\/]+).*$/src\/\1/g' | xargs -n1 basename | sort | uniq | jq -rcnR '[inputs]')
           echo "packages=$PACKAGES" >> $GITHUB_ENV
       
       - name: Upload math result for job 1
@@ -45,17 +47,18 @@ jobs:
         env:
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
         run: |
+          echo ${{ env.packages }} 
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git checkout master
           git pull
           git add .
           git commit -m "Copy file from source repository"
-          git push origin HEAD:main -f
+          git push origin HEAD:master -f
           
-      - name: Merge Pull Request
-        uses: repo-sync/pull-request@v2
-        with:
-          sourceBranch: master
-          destinationBranch: master
-          githubToken: ${{ secrets.DESTINATION_REPO_TOKEN }}
+#       - name: Merge Pull Request
+#         uses: repo-sync/pull-request@v2
+#         with:
+#           sourceBranch: master
+#           destinationBranch: master
+#           githubToken: ${{ secrets.DESTINATION_REPO_TOKEN }}
