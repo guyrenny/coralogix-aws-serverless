@@ -6,7 +6,7 @@ Metadata:
     Name: Coralogix-S3  
     Description: Send logs from S3 bucket to Coralogix. 
     Author: Coralogix
-    SpdxLicenseId: Apache-2.0    
+    SpdxLicenseId: Apache-2.0     
     LicenseUrl: LICENSE 
     ReadmeUrl: README.md
     Labels:   
