@@ -45,7 +45,7 @@ jobs:
         
         uses: actions/upload-artifact@v3
         with:
-          name: Change-file
+          name: ${{ matrix.package }}
           path: src/${{ matrix.package }}/template.*
         if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}"
           
@@ -59,7 +59,7 @@ jobs:
       - name: Download template file
         uses: actions/download-artifact@v3
         with:
-          name: Change-file
+          name: ${{ matrix.package }}
         if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}"
         
       - name: Commit and push changes 
