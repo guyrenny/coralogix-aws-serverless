@@ -62,6 +62,7 @@ jobs:
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
         run: |
           echo ${{ env.packages }}
+          ls
           rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
           chmod +x replace_codeuri.sh
           ./replace_codeuri.sh template.yaml
