@@ -4,6 +4,9 @@ on:
   pull_request:
     types: [opened, synchronize]
     branches: [master, main]
+    paths:
+      - "src/**/template.*"
+      - "src/**/README.md"
      
 jobs:
   check:
@@ -21,16 +24,27 @@ jobs:
       - name: Get changed packages
         id: get-changed-packages
         run: |
-          export PACKAGES=$(git diff --name-only --diff-filter=d ${{ github.event.pull_request.base.sha || 'origin/master' }} ${{ github.sha }} modules/ | xargs -n1 dirname | sed -r 's/modules\/([^\/]+).*$/modules\/\1/g' | xargs -n1 basename | sort | uniq | jq -rcnR '[inputs]')
+          export PACKAGES=$(git diff --name-only --diff-filter=d ${{ github.event.pull_request.base.sha || 'origin/master' }} ${{ github.sha }} src/ | xargs -n1 dirname | sed -r 's/src\/([^\/]+).*$/src\/\1/g' | xargs -n1 basename | sort | uniq | jq -rcnR '[inputs]')
           echo "packages=$PACKAGES" >> $GITHUB_ENV
+          
+          
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    needs: check
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.check.outputs.packages) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v3
         with:
           name: Change-file
-          path: src/s3/template.yaml
-      - name: ls
-        run: ls
+          path: src/${{ matrix.package }}/template.*
           
       - name: Checkout Destination Repository
         uses: actions/checkout@v2
@@ -47,20 +61,24 @@ jobs:
         env:
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
         run: |
-          echo  ${{ env.packages }}
-          mkdir -p modules/test{1,2}
-          cp ${{ env.packages }} .
+          echo ${{ env.packages }}
+          ls
+          rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
+          chmod +x replace_codeuri.sh
+          ./replace_codeuri.sh template.*
+          mv template.yaml aws-integrations/lambda-integrations/${{ matrix.package }}/
+          rm template.*.bak
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git checkout main
+          git checkout master
           git pull
           git add .
           git commit -m "Copy file from source repository"
-          git push origin HEAD:main -f
+          git push origin HEAD:master -f
           
-      - name: Merge Pull Request
-        uses: repo-sync/pull-request@v2
-        with:
-          sourceBranch: main
-          destinationBranch: main
-          githubToken: ${{ secrets.DESTINATION_REPO_TOKEN }}
+#       - name: Merge Pull Request
+#         uses: repo-sync/pull-request@v2
+#         with:
+#           sourceBranch: master
+#           destinationBranch: master
+#           githubToken: ${{ secrets.DESTINATION_REPO_TOKEN }}
