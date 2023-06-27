@@ -64,8 +64,7 @@ jobs:
           echo ${{ env.packages }}
           ls
           rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
-          chmod +x replace_codeuri.sh
-          ./replace_codeuri.sh template.*
+
           mv template.yaml aws-integrations/lambda-integrations/${{ matrix.package }}/
           rm template.*.bak
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
