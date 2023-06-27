@@ -42,22 +42,26 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Upload template file
+        
         uses: actions/upload-artifact@v3
         with:
           name: Change-file
           path: src/${{ matrix.package }}/template.*
+        if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}"
           
       - name: Checkout destination repository
         uses: actions/checkout@v2
         with:
           repository: guyrenny/cloudformation-coralogix-aws
           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
+        if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}"
           
       - name: Download template file
         uses: actions/download-artifact@v3
         with:
           name: Change-file
-          
+        if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}"
+        
       - name: Commit and push changes 
         run: |
           rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
@@ -71,3 +75,4 @@ jobs:
           git add .
           git commit -m "Copy file from serverless repository"
           git push origin HEAD:master -f
+        if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}"
