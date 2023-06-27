@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file="test-template.yaml"
+file=$1
 
 declare -i lambda_counter=0
 declare -i CustomResourceLambdaTriggerFunction_counter=0
