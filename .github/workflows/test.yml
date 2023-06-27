@@ -2,7 +2,7 @@ name: Terraform Testing
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [completed]
     branches: [master, main]
     paths:
       - "src/**/template.*"
