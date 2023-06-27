@@ -2,11 +2,10 @@ name: Terraform Testing
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [completed]
     branches: [master, main]
     paths:
       - "src/**/template.*"
-      - "src/**/README.md"
      
 jobs:
   check:
@@ -40,7 +39,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
-      - name: Upload math result for job 1
+      - name: Upload template file
         uses: actions/upload-artifact@v3
         with:
           name: Change-file
@@ -52,7 +51,7 @@ jobs:
           repository: guyrenny/cloudformation-coralogix-aws
           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
           
-      - name: Download math result for job 1
+      - name: Download template file
         uses: actions/download-artifact@v3
         with:
           name: Change-file
@@ -65,9 +64,8 @@ jobs:
           ls
           rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
           chmod +x replace_codeuri.sh
-          ./replace_codeuri.sh template.*
-          mv template.yaml aws-integrations/lambda-integrations/${{ matrix.package }}/
-          rm template.*.bak
+          ./replace_codeuri.sh template.* ${{ matrix.package }}
+          mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git checkout master
