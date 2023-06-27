@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Send logs from S3 bucket to Coralogix.
-Metadata:
+Metadata: 
   AWS::ServerlessRepo::Application:
     Name: Coralogix-S3-via-SNS
     Description: Send logs from S3 bucket to Coralogix via SNS trigger.
