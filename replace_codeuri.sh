@@ -1,4 +1,5 @@
 #!/bin/bash
+apt-get install moreutils -y
 
 file=$1
 
