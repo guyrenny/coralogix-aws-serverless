@@ -1,9 +1,10 @@
 name: Terraform Testing
 
 on:
-  pull_request:
-    types: [completed]
-    branches: [master, main]
+  push:
+    branches:
+      - main
+      - master
     paths:
       - "src/**/template.*"
      
