@@ -8,8 +8,8 @@ on:
       - "src/**/template.*"
      
 jobs:
-  check:
-    name: Check
+  Get-files:
+    name: Get-files
     runs-on: ubuntu-latest 
     if: github.event.pull_request.merged == true
     outputs: 
@@ -28,15 +28,15 @@ jobs:
           echo "packages=$PACKAGES" >> $GITHUB_ENV
           
           
-  validate:
-    name: Validate
+  Upload:
+    name: Upload
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
-    needs: check
+    needs: Get-files
     strategy:
       fail-fast: false
       matrix:
-        package: ${{ fromJSON(needs.check.outputs.packages) }}
+        package: ${{ fromJSON(needs.Get-files.outputs.packages) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -47,7 +47,7 @@ jobs:
           name: Change-file
           path: src/${{ matrix.package }}/template.*
           
-      - name: Checkout Destination Repository
+      - name: Checkout destination repository
         uses: actions/checkout@v2
         with:
           repository: guyrenny/cloudformation-coralogix-aws
@@ -58,12 +58,8 @@ jobs:
         with:
           name: Change-file
           
-      - name: Commit and Push Changes 
-        env:
-          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+      - name: Commit and push changes 
         run: |
-          echo ${{ env.packages }}
-          ls
           rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
           chmod +x replace_codeuri.sh
           ./replace_codeuri.sh template.* ${{ matrix.package }}
@@ -73,12 +69,5 @@ jobs:
           git checkout master
           git pull
           git add .
-          git commit -m "Copy file from source repository"
+          git commit -m "Copy file from serverless repository"
           git push origin HEAD:master -f
-          
-#       - name: Merge Pull Request
-#         uses: repo-sync/pull-request@v2
-#         with:
-#           sourceBranch: master
-#           destinationBranch: master
-#           githubToken: ${{ secrets.DESTINATION_REPO_TOKEN }}
