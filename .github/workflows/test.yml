@@ -62,26 +62,25 @@ jobs:
           name: ${{ matrix.package }}
           
       - name: ls
-        if: 'test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"'
         run: |
           ls
-          if -d "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
+          if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
             ls "aws-integrations/lambda-integrations/${{ matrix.package }}"
           fi
 
         
       - name: Commit and push changes
-        if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}" 
         run: |
-          rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
-          chmod +x replace_codeuri.sh
-          ./replace_codeuri.sh template.* ${{ matrix.package }}
-          mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git checkout master
-          git pull
-          git add .
-          git commit -m "Copy file from serverless repository"
-          git push origin HEAD:master -f
-        
+          if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
+            rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
+            chmod +x replace_codeuri.sh
+            ./replace_codeuri.sh template.* ${{ matrix.package }}
+            mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git checkout master
+            git pull
+            git add .
+            git commit -m "Copy file from serverless repository"
+            git push origin HEAD:master -f
+          fi
