@@ -2,7 +2,7 @@ name: Terraform Testing
 
 on:
   pull_request:
-    types: [closed]
+    types: [closed,open]
     branches: [master, main]
     paths:
       - "src/**/template.*"
@@ -11,7 +11,7 @@ jobs:
   Get-files:
     name: Get-files
     runs-on: ubuntu-latest 
-    if: github.event.pull_request.merged == true
+#     if: github.event.pull_request.merged == true
     outputs: 
       packages: ${{ env.packages }} 
     steps:
@@ -31,7 +31,7 @@ jobs:
   Upload:
     name: Upload
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+#     if: github.event.pull_request.merged == true
     needs: Get-files
     strategy:
       fail-fast: false
@@ -61,6 +61,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.package }}
+          
+      - name: ls
+        run: | 
+          ls
+          ls "aws-integrations/lambda-integrations/${{ matrix.package }}" 
         
       - name: Commit and push changes
         if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}" 
