@@ -5,7 +5,7 @@ Metadata:
   AWS::ServerlessRepo::Application:
     Name: Coralogix-S3  
     Description: Send logs from S3 bucket to Coralogix.  
-    Author: Coralogix
+    Author: Coralogix 
     SpdxLicenseId: Apache-2.0     
     LicenseUrl: LICENSE 
     ReadmeUrl: README.md
