@@ -2,7 +2,7 @@ name: Terraform Testing
 
 on:
   pull_request:
-    types: [closed,opened]
+    types: [closed]
     branches: [master, main]
     paths:
       - "src/**/template.*"
@@ -11,7 +11,7 @@ jobs:
   Get-files:
     name: Get-files
     runs-on: ubuntu-latest 
-#     if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     outputs: 
       packages: ${{ env.packages }} 
     steps:
@@ -31,7 +31,7 @@ jobs:
   Upload:
     name: Upload
     runs-on: ubuntu-latest
-#     if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     needs: Get-files
     strategy:
       fail-fast: false
@@ -42,32 +42,21 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Upload template file
-        if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}" 
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.package }}
           path: src/${{ matrix.package }}/template.*
           
       - name: Checkout destination repository
-        if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}" 
         uses: actions/checkout@v2
         with:
           repository: guyrenny/cloudformation-coralogix-aws
           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
        
       - name: Download template file
-        if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}" 
         uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.package }}
-          
-      - name: ls
-        run: |
-          ls
-          if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
-            ls "aws-integrations/lambda-integrations/${{ matrix.package }}"
-          fi
-
         
       - name: Commit and push changes
         run: |
