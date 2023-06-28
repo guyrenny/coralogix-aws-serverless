@@ -12,7 +12,7 @@ Metadata:
     Labels:
       - coralogix
       - logs
-      - apache
+      - apache 
       - kafka
       - stream
     HomePageUrl: https://coralogix.com
