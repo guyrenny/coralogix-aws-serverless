@@ -7,11 +7,11 @@ Metadata:
     Description: Send CloudTrail logs from SNS bucket to Coralogix.
     Author: Coralogix
     SpdxLicenseId: Apache-2.0
-    LicenseUrl: LICENSE
+    LicenseUrl: LICENSE  
     ReadmeUrl: README.md
     Labels:
       - coralogix
-      - logs
+      - logs 
       - cloudtrail
       - sns
     HomePageUrl: https://coralogix.com
