@@ -62,10 +62,11 @@ jobs:
           name: ${{ matrix.package }}
           
       - name: ls
-        if: test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"
-        run: | 
+        if: 'test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"'
+        run: |
           ls
-          ls "aws-integrations/lambda-integrations/${{ matrix.package }}" 
+          ls "aws-integrations/lambda-integrations/${{ matrix.package }}"
+
         
       - name: Commit and push changes
         if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}" 
