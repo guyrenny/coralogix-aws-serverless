@@ -54,22 +54,18 @@ jobs:
         with:
           repository: guyrenny/cloudformation-coralogix-aws
           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
-
-          
+       
       - name: Download template file
         if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}" 
         uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.package }}
           
-      - name: Debug
-        run: echo "Directory exists $([[ -d 'aws-integrations/lambda-integrations/${{ matrix.package }}']] && echo 'true' || echo 'false')"
-
-          
       - name: ls
+        if:  -d "aws-integrations/lambda-integrations/${{ matrix.package }}"
         run: | 
           ls
-          
+          echo $(-d "aws-integrations/lambda-integrations/${{ matrix.package }}")
           ls "aws-integrations/lambda-integrations/${{ matrix.package }}" 
         
       - name: Commit and push changes
