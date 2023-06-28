@@ -2,7 +2,7 @@ name: Terraform Testing
 
 on:
   pull_request:
-    types: [closed,open]
+    types: [closed,opened]
     branches: [master, main]
     paths:
       - "src/**/template.*"
@@ -62,9 +62,14 @@ jobs:
         with:
           name: ${{ matrix.package }}
           
+      - name: Debug
+        run: echo "Directory exists $([[ -d 'aws-integrations/lambda-integrations/${{ matrix.package }}']] && echo 'true' || echo 'false')"
+
+          
       - name: ls
         run: | 
           ls
+          
           ls "aws-integrations/lambda-integrations/${{ matrix.package }}" 
         
       - name: Commit and push changes
