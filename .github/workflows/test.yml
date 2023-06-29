@@ -50,7 +50,7 @@ jobs:
       - name: Checkout destination repository
         uses: actions/checkout@v2
         with:
-          repository: guyrenny/cloudformation-coralogix-aws
+          repository: coralogix/cloudformation-coralogix-aws
           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
        
       - name: Download template file
