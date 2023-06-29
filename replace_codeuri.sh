@@ -4,6 +4,7 @@
 
 file=$1
 puckage_name=$2
+README_file=$3
 bucket_string="!Sub coralogix-serverless-repo-\${AWS::Region}"
 
 if grep -q "LambdaFunction" "$file"; then
@@ -19,7 +20,7 @@ if grep -q "CustomResourceLambdaTriggerFunction" "$file"; then
     sed -i "s/'!Sub coralogix-serverless-repo-\${AWS::Region}/!Sub 'coralogix-serverless-repo-\${AWS::Region}/g" $file
 fi
 
-sed -i '1s/^/#created automatically from coralogix\/coralogix-aws-serverless\n/' $template_file
+sed -i '1s/^/#created automatically from coralogix\/coralogix-aws-serverless\n/' $file
 
 sed -i '/^## AWS Resource Manager Template Deployment$/,/^## Fields/c\
 ## Fields 
