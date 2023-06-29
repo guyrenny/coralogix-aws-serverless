@@ -40,6 +40,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        
+      - name: Change template to CF
+        run: |
+          chmod +x replace_codeuri.sh
+          ./replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }}
       
       - name: Upload template file
         uses: actions/upload-artifact@v3
@@ -63,12 +68,8 @@ jobs:
           if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}" || test -e "aws-integrations/${{ matrix.package }}" ; then
             if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
               rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
-              chmod +x replace_codeuri.sh
-              ./replace_codeuri.sh template.* ${{ matrix.package }}
               mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
             else
-              rm aws-integrations/${{ matrix.package }}/template.*
-              chmod +x replace_codeuri.sh
               ./replace_codeuri.sh template.* ${{ matrix.package }}
               mv template.* aws-integrations/${{ matrix.package }}/
             fi
