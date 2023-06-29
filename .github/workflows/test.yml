@@ -60,11 +60,18 @@ jobs:
         
       - name: Commit and push changes
         run: |
-          if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
-            rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
-            chmod +x replace_codeuri.sh
-            ./replace_codeuri.sh template.* ${{ matrix.package }}
-            mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
+          if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}" || test -e "aws-integrations/${{ matrix.package }}" ; then
+            if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
+              rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
+              chmod +x replace_codeuri.sh
+              ./replace_codeuri.sh template.* ${{ matrix.package }}
+              mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
+            else
+              rm aws-integrations/${{ matrix.package }}/template.*
+              chmod +x replace_codeuri.sh
+              ./replace_codeuri.sh template.* ${{ matrix.package }}
+              mv template.* aws-integrations/${{ matrix.package }}/
+            fi
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
             git checkout master
