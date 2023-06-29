@@ -18,3 +18,11 @@ if grep -q "CustomResourceLambdaTriggerFunction" "$file"; then
     yq eval '.Resources.CustomResourceLambdaTriggerFunction.Properties.CodeUri = {"Bucket": "'"$bucket_string"'", "S3Key": "helper.zip"}' -i $file
     sed -i "s/'!Sub coralogix-serverless-repo-\${AWS::Region}/!Sub 'coralogix-serverless-repo-\${AWS::Region}/g" $file
 fi
+
+sed -i '1s/^/#created automatically from coralogix\/coralogix-aws-serverless\n/' $template_file
+
+sed -i '/^## AWS Resource Manager Template Deployment$/,/^## Fields/c\
+## Fields 
+' $README_file
+
+sed -i '3s/^/This template were created automatically from coralogix\/coralogix-aws-serverless.\nTo make a change in the template go to the serverless repo and change he file from there.\n\n/' $README_file
