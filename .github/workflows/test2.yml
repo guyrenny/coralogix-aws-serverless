@@ -12,7 +12,7 @@ jobs:
     - name: Read matrix YAML
       id: read-matrix
       run: |
-        packages=$(cat matrix.yml | yq e -j -)
+        packages=$(cat matrix.yml | yq e '.app' -j -)
         echo "packages=$packages" >> $GITHUB_ENV
 
 
