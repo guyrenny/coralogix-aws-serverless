@@ -15,7 +15,7 @@ Metadata:
       - s3
       - sns
     HomePageUrl: https://coralogix.com
-    SemanticVersion: 1.0.25
+    SemanticVersion: 1.0.25 made a change
     SourceCodeUrl: https://github.com/coralogix/coralogix-aws-serverless
   AWS::CloudFormation::Interface:
     ParameterGroups:
@@ -81,7 +81,7 @@ Parameters:
     Type: String
     Description: The Coralogix location region [Europe, Europe2, India, Singapore, US]
     AllowedValues:
-      - Europe
+      - Europe234
       - Europe2
       - India
       - Singapore
