@@ -2,7 +2,7 @@ name: Terraform Testing
 
 on:
   pull_request:
-    types: [closed]
+    types: [closed,opened, synchronize]
     branches: [master, main]
     paths:
       - "src/**/template.*"
@@ -11,7 +11,7 @@ jobs:
   Get-files:
     name: Get-files
     runs-on: ubuntu-latest 
-    if: github.event.pull_request.merged == true
+#     if: github.event.pull_request.merged == true
     outputs: 
       packages: ${{ env.packages }} 
     steps:
@@ -31,7 +31,7 @@ jobs:
   Upload:
     name: Upload
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+#     if: github.event.pull_request.merged == true
     needs: Get-files
     strategy:
       fail-fast: false
@@ -41,16 +41,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
-      - name: Change template to CF
+      - name: Change template and README to CF
         run: |
           chmod +x replace_codeuri.sh
-          ./replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }}
+          ./replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }} src/${{ matrix.package }}/README.md
       
       - name: Upload template file
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.package }}
+          name: ${{ matrix.package }}-template
           path: src/${{ matrix.package }}/template.*
+      
+      - name: Upload README file
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.package }}-README
+          path: src/${{ matrix.package }}/README.md
           
       - name: Checkout destination repository
         uses: actions/checkout@v2
@@ -61,17 +67,21 @@ jobs:
       - name: Download template file
         uses: actions/download-artifact@v3
         with:
-          name: ${{ matrix.package }}
+          name: ${{ matrix.package }}-template
+          
+      - name: Download README file
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ matrix.package }}-README
         
       - name: Commit and push changes
         run: |
-          ls
           if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}" || test -e "aws-integrations/${{ matrix.package }}" ; then
             if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
-              rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
+              ls
               mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
+              mv README.md aws-integrations/lambda-integrations/${{ matrix.package }}/
             else
-              rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
               mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
             fi
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
