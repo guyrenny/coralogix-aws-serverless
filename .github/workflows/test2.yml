@@ -3,17 +3,18 @@ on:
     branches:
       - '*'
 jobs:
-#   getmatrix:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Read matrix YAML
-#       id: read-matrix
-#       run: echo "::set-output name=matrix::"
+  getmatrix:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Read matrix YAML
+      id: read-matrix
+      run: echo "::set-output name=matrix::$(cat matrix.yml | yq r -j -)"
+
 
   build:
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(cat matrix.yml | yq r -j -) }}
+      matrix: ${{ fromJson(steps.read-matrix.outputs.matrix) }}
           # Add more applications here...
     steps:
       - uses: actions/checkout@v2
