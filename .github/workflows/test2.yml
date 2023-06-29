@@ -8,6 +8,7 @@ jobs:
     outputs:
       packages: ${{ env.packages }}
     steps:
+    - uses: actions/checkout@v2
     - name: Read matrix YAML
       id: read-matrix
       run: |
@@ -28,9 +29,6 @@ jobs:
           filters: |
             '${{ matrix.app.name }}':
               - '${{ matrix.app.path }}'
-      - if: steps.changes.outputs[matrix.app.name] == 'true'
-        name: ${{ matrix.app.name }} Build
-        run: echo ${{ matrix.app.name }}
           
       - if: steps.changes.outputs[matrix.app.name] == 'true'          
         name: Change template and README to CF
