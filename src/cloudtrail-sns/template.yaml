@@ -2,8 +2,8 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Send CloudTrail logs from SNS bucket to Coralogix.
 Metadata:
-  AWS::ServerlessRepo::Application: another test
-    Name: Coralogix-CloudTrail-via-SNS
+  AWS::ServerlessRepo::Application:
+    Name: Coralogix-CloudTrail-via-SNS-sssssssss
     Description: Send CloudTrail logs from SNS bucket to Coralogix.
     Author: Coralogix
     SpdxLicenseId: Apache-2.0
