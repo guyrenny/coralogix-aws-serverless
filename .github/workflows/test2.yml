@@ -5,16 +5,20 @@ on:
 jobs:
   getmatrix:
     runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ env.packages }}
     steps:
     - name: Read matrix YAML
       id: read-matrix
-      run: echo "::set-output name=matrix::$(cat matrix.yml | yq r -j -)"
+      run: |
+        packages=$(cat matrix.yml | yq r -j -)
+        echo "packages=$packages" >> $GITHUB_ENV
 
 
   build:
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(needs.getmatrix.read-matrix.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.getmatrix.outputs.packages) }}
           # Add more applications here...
     steps:
       - uses: actions/checkout@v2
