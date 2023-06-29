@@ -69,7 +69,6 @@ jobs:
             if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
               ls
               mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
-              touch file2
             else
               mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
             fi
