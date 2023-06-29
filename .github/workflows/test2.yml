@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson($(cat matrix.yml | yq r -j -)) }}
+      matrix: ${{ fromJson(cat matrix.yml | yq r -j -) }}
           # Add more applications here...
     steps:
       - uses: actions/checkout@v2
