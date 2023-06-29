@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(steps.read-matrix.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.getmatrix.read-matrix.outputs.matrix) }}
           # Add more applications here...
     steps:
       - uses: actions/checkout@v2
