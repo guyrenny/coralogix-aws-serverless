@@ -41,10 +41,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
-      - name: Change template to CF
+      - name: Change template and README to CF
         run: |
           chmod +x replace_codeuri.sh
-          ./replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }}
+          ./replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }} src/${{ matrix.package }}/README.md
       
       - name: Upload template file
         uses: actions/upload-artifact@v3
