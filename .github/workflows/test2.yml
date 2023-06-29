@@ -68,21 +68,21 @@ jobs:
         name: Change template and README to CF
         run: |
           chmod +x replace_codeuri.sh
-          ./replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }} src/${{ matrix.package }}/README.md
+          ./replace_codeuri.sh src/${{ matrix.app.name }}/template.* ${{ matrix.app.name }} src/${{matrix.app.name }}/README.md
     
       - if: steps.changes.outputs[matrix.app.name] == 'true'    
         name: Upload template file
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.package }}-template
-          path: src/${{ matrix.package }}/template.*
+          name: ${{ matrix.app.name }}-template
+          path: src/${{ matrix.app.name }}/template.*
       
       - if: steps.changes.outputs[matrix.app.name] == 'true'      
         name: Upload README file
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.package }}-README
-          path: src/${{ matrix.package }}/README.md
+          name: ${{ matrix.app.name }}-README
+          path: src/${{ matrix.app.name }}/README.md
         
       - if: steps.changes.outputs[matrix.app.name] == 'true'        
         name: Checkout destination repository
@@ -95,24 +95,24 @@ jobs:
         name: Download template file
         uses: actions/download-artifact@v3
         with:
-          name: ${{ matrix.package }}-template
+          name: ${{ matrix.app.name }}-template
           
       - if: steps.changes.outputs[matrix.app.name] == 'true'          
         name: Download README file
         uses: actions/download-artifact@v3
         with:
-          name: ${{ matrix.package }}-README
+          name: ${{ matrix.app.name }}-README
         
       - if: steps.changes.outputs[matrix.app.name] == 'true'        
         name: Commit and push changes
         run: |
-          if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}" || test -e "aws-integrations/${{ matrix.package }}" ; then
-            if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
+          if test -e "aws-integrations/lambda-integrations/${{ matrix.app.name }}" || test -e "aws-integrations/${{ matrix.app.name }}" ; then
+            if test -e "aws-integrations/lambda-integrations/${{ matrix.app.name }}"; then
               ls
-              mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
-              mv README.md aws-integrations/lambda-integrations/${{ matrix.package }}/
+              mv template.* aws-integrations/lambda-integrations/${{ matrix.app.name }}/
+              mv README.md aws-integrations/lambda-integrations/${{ matrix.app.name }}/
             else
-              mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
+              mv template.* aws-integrations/lambda-integrations/${{ matrix.app.name }}/
             fi
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
