@@ -12,7 +12,7 @@ jobs:
     - name: Read matrix YAML
       id: read-matrix
       run: |
-        packages=$(cat matrix.yml | jq -r '.app | join(",")')
+        packages=$(yq eval 'tojson' matrix.yml)
         echo "PACKAGES=$packages" >> $GITHUB_ENV
 
 
