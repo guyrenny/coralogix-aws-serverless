@@ -6,7 +6,7 @@ jobs:
   getmatrix:
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ env.packages }}
+      packages: ${{ env.PACKAGES }}
     steps:
     - uses: actions/checkout@v2
     - name: Read matrix YAML
@@ -17,7 +17,7 @@ jobs:
         echo ${{ env.packages }}
         
     - name: echo2
-      run: ${{ env.packages }}
+      run: ${{ env.PACKAGES }}
 
   build:
     runs-on: ubuntu-latest
