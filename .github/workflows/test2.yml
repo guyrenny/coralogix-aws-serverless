@@ -63,19 +63,21 @@ jobs:
       - if: steps.changes.outputs[matrix.app.name] == 'true'
         name: ${{ matrix.app.name }} Build
         run: echo ${{ matrix.app.name }}
-        
-        
+          
+      - if: steps.changes.outputs[matrix.app.name] == 'true'          
       - name: Change template and README to CF
         run: |
           chmod +x replace_codeuri.sh
           ./replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }} src/${{ matrix.package }}/README.md
-      
+    
+      - if: steps.changes.outputs[matrix.app.name] == 'true'    
       - name: Upload template file
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.package }}-template
           path: src/${{ matrix.package }}/template.*
       
+      - if: steps.changes.outputs[matrix.app.name] == 'true'      
       - name: Upload README file
         uses: actions/upload-artifact@v3
         with:
@@ -88,16 +90,19 @@ jobs:
           repository: guyrenny/cloudformation-coralogix-aws
           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
        
+      - if: steps.changes.outputs[matrix.app.name] == 'true'      
       - name: Download template file
         uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.package }}-template
           
+      - if: steps.changes.outputs[matrix.app.name] == 'true'          
       - name: Download README file
         uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.package }}-README
         
+      - if: steps.changes.outputs[matrix.app.name] == 'true'        
       - name: Commit and push changes
         run: |
           if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}" || test -e "aws-integrations/${{ matrix.package }}" ; then
