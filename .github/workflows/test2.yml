@@ -14,20 +14,15 @@ jobs:
       run: |
         packages=$(cat matrix.yml | yq eval 'tojson' - | jq -c '.')
         echo "PACKAGES=$packages" >> $GITHUB_ENV
-        echo ${{ env.packages }}
-        
-    - name: echo2
-      run: ${{ env.PACKAGES }}
+
 
   build:
     runs-on: ubuntu-latest
     needs: getmatrix
-#     strategy:
-#       matrix: ${{ needs.getmatrix.outputs.packages }}
-#           # Add more applications here...
+    strategy:
+      matrix: ${{ needs.getmatrix.outputs.packages }}
+          # Add more applications here...
     steps:
-      - name: echo
-        run: echo ${{ needs.getmatrix.outputs.packages }}
       - uses: actions/checkout@v2
       - id: changes
         uses: dorny/paths-filter@v2
