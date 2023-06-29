@@ -19,10 +19,12 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ needs.getmatrix.outputs.packages }}
-          # Add more applications here...
+#     strategy:
+#       matrix: ${{ needs.getmatrix.outputs.packages }}
+#           # Add more applications here...
     steps:
+      - name: echo
+        run: echo ${{ needs.getmatrix.outputs.packages }}
       - uses: actions/checkout@v2
       - id: changes
         uses: dorny/paths-filter@v2
