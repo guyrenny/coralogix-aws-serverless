@@ -1,4 +1,3 @@
-{
     {
       "name": "archive-reader",
       "path": "src/archive-reader/**"
@@ -83,4 +82,3 @@
       "name": "vpc-flow-logs",
       "path": "src/vpc-flow-logs/**"
     }
-}
