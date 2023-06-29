@@ -24,7 +24,7 @@ jobs:
 #           # Add more applications here...
     steps:
       - name: echo
-        run: echo ${{ getmatrix.outputs.packages }}
+        run: echo ${{ needs.getmatrix.outputs.packages }}
       - uses: actions/checkout@v2
       - id: changes
         uses: dorny/paths-filter@v2
