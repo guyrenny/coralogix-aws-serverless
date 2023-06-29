@@ -20,7 +20,7 @@ if grep -q "CustomResourceLambdaTriggerFunction" "$template_file"; then
     sed -i "s/'!Sub coralogix-serverless-repo-\${AWS::Region}/!Sub 'coralogix-serverless-repo-\${AWS::Region}/g" $template_file
 fi
 
-sed -i "1s/^/#created automatically from coralogix\/coralogix-aws-serverless\n#Link to the repo: https:\/\/github.com\/coralogix\/coralogix-aws-serverless\/tree\/master\/src\/$puckage_name\n/" $template_file
+sed -i "1s/^/#Created automatically from coralogix\/coralogix-aws-serverless\n#Link to the repo: https:\/\/github.com\/coralogix\/coralogix-aws-serverless\/tree\/master\/src\/$puckage_name\n/" $template_file
 
 sed -i '/^## AWS Resource Manager Template Deployment$/,/^## Fields/c\
 ## Fields 
