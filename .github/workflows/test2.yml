@@ -13,7 +13,7 @@ jobs:
       id: read-matrix
       run: |
         packages=$(cat matrix.yml | yq e '.app' -j -)
-        echo "packages=${packages//\"/}" >> $GITHUB_ENV
+        echo "PACKAGES=${packages//\"/}" >> $GITHUB_ENV
 
 
   build:
