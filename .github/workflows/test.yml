@@ -2,7 +2,7 @@ name: Terraform Testing
 
 on:
   pull_request:
-    types: [closed]
+    types: [closed,opened, synchronize]
     branches: [master, main]
     paths:
       - "src/**/template.*"
@@ -11,7 +11,7 @@ jobs:
   Get-files:
     name: Get-files
     runs-on: ubuntu-latest 
-    if: github.event.pull_request.merged == true
+#     if: github.event.pull_request.merged == true
     outputs: 
       packages: ${{ env.packages }} 
     steps:
@@ -31,7 +31,7 @@ jobs:
   Upload:
     name: Upload
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+#     if: github.event.pull_request.merged == true
     needs: Get-files
     strategy:
       fail-fast: false
