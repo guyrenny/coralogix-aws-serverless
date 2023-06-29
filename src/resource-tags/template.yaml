@@ -6,7 +6,7 @@ Metadata:
     Name: Coralogix-Resource-Tags
     Description: Send resource tags to Coralogix.
     Author: Coralogix
-    SpdxLicenseId: Apache-2.0 
+    SpdxLicenseId: Apache-2.0  
     LicenseUrl: LICENSE
     ReadmeUrl: README.md
     Labels:
