@@ -80,7 +80,7 @@ jobs:
             if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
               ls
               mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
-              mv READMME.md aws-integrations/lambda-integrations/${{ matrix.package }}/
+              mv README.md aws-integrations/lambda-integrations/${{ matrix.package }}/
             else
               mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
             fi
