@@ -14,6 +14,9 @@ jobs:
       run: |
         packages=$(cat matrix.yml | yq eval 'tojson' - | jq -c '.' |  jq -rcnR '[inputs]')
         echo "PACKAGES=$packages" >> $GITHUB_ENV
+        
+    - name: echo2
+      run: echo ${{ env.PACKAGES }}
 
 
   build:
