@@ -65,9 +65,10 @@ jobs:
         
       - name: Commit and push changes
         run: |
-          ls
+          
           if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}" || test -e "aws-integrations/${{ matrix.package }}" ; then
             if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}"; then
+              ls
               rm aws-integrations/lambda-integrations/${{ matrix.package }}/template.*
               mv template.* aws-integrations/lambda-integrations/${{ matrix.package }}/
             else
