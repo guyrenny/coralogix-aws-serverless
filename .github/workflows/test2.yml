@@ -13,7 +13,7 @@ jobs:
       id: read-matrix
       run: |
         packages=($(cat matrix.yml | jq -r '.[].name'))
-        echo "PACKAGES=$packages" >> $GITHUB_ENV
+        echo "PACKAGES=$packages[*]" >> $GITHUB_ENV
         
     - name: echo2
       run: echo ${{ env.PACKAGES }}
