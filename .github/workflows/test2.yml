@@ -6,25 +6,26 @@ jobs:
   getmatrix:
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ env.PACKAGES }}
+      packages: ${{ env.packages }}
     steps:
     - uses: actions/checkout@v2
     - name: Read matrix YAML
       id: read-matrix
       run: |
-        export names=$(jq -r '.[].name' matrix.yml | jq -rcnR '[inputs]')
-        echo "PACKAGES=$names" >> $GITHUB_ENV
-        echo $names
+        export PACKAGES=$(jq -r '.[].name' matrix.yml | jq -rcnR '[inputs]')
+        echo "packages=$PACKAGES" >> $GITHUB_ENV
+        echo ${{ env.packages }}
         
     - name: echo2
-      run: echo ${{ env.PACKAGES }}
+      run: echo ${{ env.packages }}
 
 
   build:
     runs-on: ubuntu-latest
     needs: getmatrix
     strategy:
-      matrix: ${{ fromJson(needs.getmatrix.outputs.packages) }}
+      matrix:
+        package: ${{ fromJSON(needs.check.outputs.packages) }}
           # Add more applications here...
     steps:
       - uses: actions/checkout@v2
