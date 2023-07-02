@@ -1,4 +1,4 @@
-name: Terraform Testing
+name: Synchronizing Cloudformation repo with serverless
 
 on:
   pull_request:
