@@ -3,11 +3,11 @@ Transform: AWS::Serverless-2016-10-31
 Description: Send CloudTrail logs from S3 bucket to Coralogix.
 Metadata:
   AWS::ServerlessRepo::Application:
-    Name: Coralogix-CloudTrail-cloudtrail       
-    Description: Send CloudTrail logs from S3 bucket to Coralogix.   
+    Name: Coralogix-CloudTrail-cloudtrail-trailcloud?yescloudtraail-trail  l    llaaaddfdsrdsdf
+    Description: Send CloudTrail logs from S3 bucket to Coralogix.    
     Author: Coralogix
     SpdxLicenseId: Apache-2.0
-    LicenseUrl: LICENSE   
+    LicenseUrl: LICENSE    
     ReadmeUrl: README.md   
     Labels:
       - coralogix

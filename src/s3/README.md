@@ -1,4 +1,4 @@
-# AWS S3 integarion for Coralogix
+# AWS S3 integarion for Coralogixx
 
 Coralogix provides a predefined Lambda function to easily forward your S3 logs straight to the Coralogix platform.
 

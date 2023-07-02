@@ -1,17 +1,10 @@
-name: Synchronizing Cloudformation repo with serverless
-
 on:
-  pull_request:
-    types: [closed]
-    branches: [master, main]
-    paths:
-      - "src/**/template.*"
-      - "src/**/README.md"
-     
+  push:
+    branches:
+      - 'tata/*'
 jobs:
-  Get-matrix:
+  getmatrix:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     outputs:
       packages: ${{ env.packages }}
     steps:
@@ -22,14 +15,18 @@ jobs:
         export PACKAGES=$(jq -r '.[].name' matrix.yml | jq -rcnR '[inputs]')
         echo "packages=$PACKAGES" >> $GITHUB_ENV
         echo ${{ env.packages }}
+        
+    - name: echo2
+      run: echo ${{ env.packages }}
 
-  Push-changes:
+
+  build:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
-    needs: Get-matrix
+    needs: getmatrix
     strategy:
       matrix:
-        package: ${{ fromJSON(needs.Get-matrix.outputs.packages) }}
+        package: ${{ fromJSON(needs.getmatrix.outputs.packages) }}
+          # Add more applications here...
     steps:
       - uses: actions/checkout@v2
       - id: changes
