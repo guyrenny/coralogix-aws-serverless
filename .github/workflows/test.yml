@@ -19,7 +19,7 @@ jobs:
     - name: Read matrix YAML
       id: read-matrix
       run: |
-        export PACKAGES=$(jq -r '.[].name' matrix.yml | jq -rcnR '[inputs]')
+        export PACKAGES=$(jq -r '.[].name' matrix.js | jq -rcnR '[inputs]')
         echo "packages=$PACKAGES" >> $GITHUB_ENV
         echo ${{ env.packages }}
 
