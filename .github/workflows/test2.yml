@@ -14,9 +14,10 @@ jobs:
       run: |
         names=($(cat matrix.yml | jq -r '.[].name'))
         echo "PACKAGES=$names" >> $GITHUB_ENV
+        echo $names
         
     - name: echo2
-      run: echo $names
+      run: echo ${{ env.PACKAGES }}
 
 
   build:
