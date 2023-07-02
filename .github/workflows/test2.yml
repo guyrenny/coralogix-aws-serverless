@@ -36,7 +36,7 @@ jobs:
             '${{ matrix.package }}':
               - 'src/${{ matrix.package }}/**'
           
-      - if: steps.changes.outputs[matrix.app.name] == 'true'          
+      - if: steps.changes.outputs[matrix.package] == 'true'          
         name: Change template and README to CF
         run: |
           chmod +x replace_codeuri.sh
