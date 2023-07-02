@@ -12,7 +12,7 @@ jobs:
     - name: Read matrix YAML
       id: read-matrix
       run: |
-        names=($(cat matrix.yml | jq -r '.[].name'))
+        names=($(jq -r '.[].name' matrix.yml))
         packages=$(jq -n --argjson names "${names[*]}" '$names')
         echo "PACKAGES=$packages" >> $GITHUB_ENV
         echo $names
