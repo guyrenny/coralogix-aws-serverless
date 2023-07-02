@@ -12,7 +12,7 @@ jobs:
     - name: Read matrix YAML
       id: read-matrix
       run: |
-        export names=$(jq -r '.[].name' matrix.yml | jq -r -s @csv)
+        export names=$(jq -r '.[].name' matrix.yml | jq -rcnR '[inputs]')
         echo "PACKAGES=$names" >> $GITHUB_ENV
         echo $names
         
