@@ -8,15 +8,15 @@ README_file=$3
 bucket_string="!Sub coralogix-serverless-repo-\${AWS::Region}"
 
 if grep -q "LambdaFunction" "$template_file"; then
-    yq eval '.Resources.LambdaFunction.Properties.CodeUri = {"Bucket": "'"$bucket_string"'", "S3Key": "'"$puckage_name"'.zip"}' -i $template_file
+    yq eval '.Resources.LambdaFunction.Properties.CodeUri = {"Bucket": "'"$bucket_string"'", "Key": "'"$puckage_name"'.zip"}' -i $template_file
     sed -i "s/'!Sub coralogix-serverless-repo-\${AWS::Region}/!Sub 'coralogix-serverless-repo-\${AWS::Region}/g" $template_file
 fi
 if grep -q "LambdaFunctionSSM" "$template_file"; then
-    yq eval '.Resources.LambdaFunctionSSM.Properties.CodeUri = {"Bucket": "'"$bucket_string"'", "S3Key": "'"$puckage_name"'.zip"}' -i $template_file
+    yq eval '.Resources.LambdaFunctionSSM.Properties.CodeUri = {"Bucket": "'"$bucket_string"'", "Key": "'"$puckage_name"'.zip"}' -i $template_file
     sed -i "s/'!Sub coralogix-serverless-repo-\${AWS::Region}/!Sub 'coralogix-serverless-repo-\${AWS::Region}/g" $template_file
 fi
 if grep -q "CustomResourceLambdaTriggerFunction" "$template_file"; then
-    yq eval '.Resources.CustomResourceLambdaTriggerFunction.Properties.CodeUri = {"Bucket": "'"$bucket_string"'", "S3Key": "helper.zip"}' -i $template_file
+    yq eval '.Resources.CustomResourceLambdaTriggerFunction.Properties.CodeUri = {"Bucket": "'"$bucket_string"'", "Key": "helper.zip"}' -i $template_file
     sed -i "s/'!Sub coralogix-serverless-repo-\${AWS::Region}/!Sub 'coralogix-serverless-repo-\${AWS::Region}/g" $template_file
 fi
 
