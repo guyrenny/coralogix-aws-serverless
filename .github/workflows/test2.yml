@@ -13,8 +13,8 @@ jobs:
       id: read-matrix
       run: |
         names=$( jq -rcnR '[inputs]' matrix.yml)
-        echo "PACKAGES=$names[1]" >> $GITHUB_ENV
-        echo $names
+        echo "PACKAGES=$names" >> $GITHUB_ENV
+        echo $names[1]
         
     - name: echo2
       run: echo ${{ env.PACKAGES[1] }}
