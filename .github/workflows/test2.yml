@@ -25,7 +25,7 @@ jobs:
     needs: getmatrix
     strategy:
       matrix:
-        package: ${{ fromJSON(needs.check.outputs.packages) }}
+        package: ${{ fromJSON(needs.getmatrix.outputs.packages) }}
           # Add more applications here...
     steps:
       - uses: actions/checkout@v2
