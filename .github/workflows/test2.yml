@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - '*'
+      - 'tata/*'
 jobs:
   getmatrix:
     runs-on: ubuntu-latest
