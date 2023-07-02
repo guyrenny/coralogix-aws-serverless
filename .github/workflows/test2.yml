@@ -42,40 +42,40 @@ jobs:
           chmod +x replace_codeuri.sh
           ./replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }} src/${{ matrix.package }}/README.md
     
-      - if: steps.changes.outputs[matrix.app.name] == 'true'    
+      - if: steps.changes.outputs[matrix.package] == 'true'    
         name: Upload template file
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.package }}-template
           path: src/${{ matrix.package }}/template.*
       
-      - if: steps.changes.outputs[matrix.app.name] == 'true'      
+      - if: steps.changes.outputs[matrix.package] == 'true'      
         name: Upload README file
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.package }}-README
           path: src/${{ matrix.package }}/README.md
         
-      - if: steps.changes.outputs[matrix.app.name] == 'true'        
+      - if: steps.changes.outputs[matrix.package] == 'true'        
         name: Checkout destination repository
         uses: actions/checkout@v2
         with:
           repository: guyrenny/cloudformation-coralogix-aws
           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
        
-      - if: steps.changes.outputs[matrix.app.name] == 'true'      
+      - if: steps.changes.outputs[matrix.package] == 'true'      
         name: Download template file
         uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.package }}-template
           
-      - if: steps.changes.outputs[matrix.app.name] == 'true'          
+      - if: steps.changes.outputs[matrix.package] == 'true'          
         name: Download README file
         uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.package }}-README
         
-      - if: steps.changes.outputs[matrix.app.name] == 'true'        
+      - if: steps.changes.outputs[matrix.package] == 'true'        
         name: Commit and push changes
         run: |
           if test -e "aws-integrations/lambda-integrations/${{ matrix.package }}" || test -e "aws-integrations/${{ matrix.package }}" ; then
