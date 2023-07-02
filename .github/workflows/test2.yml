@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: getmatrix
     strategy:
-      matrix: ${{ needs.getmatrix.outputs.packages }}
+      matrix: ${{ fromJson(needs.getmatrix.outputs.packages) }}
           # Add more applications here...
     steps:
       - uses: actions/checkout@v2
