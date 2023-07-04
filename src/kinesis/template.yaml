@@ -4,7 +4,7 @@ Description: Send Kinesis stream data to Coralogix.
 Metadata:
   AWS::ServerlessRepo::Application:
     Name: Coralogix-Kinesis
-    Description: Send Kinesis stream data to Coralogix com. 
+    Description: Send Kinesis stream data to Coralogix com. ew
     Author: Coralogix
     SpdxLicenseId: Apache-2.0 
     LicenseUrl: LICENSE
