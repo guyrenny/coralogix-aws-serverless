@@ -71,7 +71,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.package }}-README
-          path: aws-integrations/lambda-integrations/${{ matrix.package }}/
+#           path: aws-integrations/lambda-integrations/${{ matrix.package }}/
         
       - if: steps.changes.outputs[matrix.package] == 'true'        
         name: Commit and push changes
