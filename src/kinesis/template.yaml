@@ -13,7 +13,7 @@ Metadata:
       - coralogix
       - logs
       - stream
-      - kinesis test test
+      - kinesis test test test
     HomePageUrl: https://coralogix.com
     SemanticVersion: 1.0.12
     SourceCodeUrl: https://github.com/coralogix/coralogix-aws-serverless
