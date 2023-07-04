@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: AWS Lambda function for sending VPC Flow Logs from an existing S3 bucket to Coralogixsadsdf
+Description: AWS Lambda function for sending VPC Flow Logs from an existing S3 bucket to Coralogixsadsdfasdxzcdf
 Metadata:
   AWS::ServerlessRepo::Application:
     Name: Coralogix-VPC-Flog-Logs-S3-s3
@@ -14,6 +14,7 @@ Metadata:
       - logs 
       - s3
       - vpc
+      - us test
     HomePageUrl: https://coralogix.com
     SemanticVersion: 1.0.5
     SourceCodeUrl: https://github.com/coralogix/coralogix-aws-serverless
