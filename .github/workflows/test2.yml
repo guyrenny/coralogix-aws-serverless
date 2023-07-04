@@ -6,7 +6,7 @@ on:
 jobs:
   Get-matrix:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+#     if: github.event.pull_request.merged == true
     outputs:
       packages: ${{ env.packages }}
     steps:
@@ -19,7 +19,7 @@ jobs:
         echo ${{ env.packages }}
   Push-changes:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+#     if: github.event.pull_request.merged == true
     needs: Get-matrix
     strategy:
       matrix:
