@@ -12,7 +12,7 @@ Metadata:
     Labels:
       - coralogix
       - logs
-      - cloudwatch test
+      - cloudwatch test test
     HomePageUrl: https://coralogix.com
     SemanticVersion: 1.0.20
     SourceCodeUrl: https://github.com/coralogix/coralogix-aws-serverless
