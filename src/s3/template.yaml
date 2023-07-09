@@ -4,15 +4,15 @@ Description: Send logs from S3 bucket to Coralogix.
 Metadata:
   AWS::ServerlessRepo::Application:
     Name: Coralogix-S3
-    Description: Send logs from S3 bucket to Coralogix.
-    Author: Coralogix
-    SpdxLicenseId: Apache-2.0
-    LicenseUrl: LICENSE
-    ReadmeUrl: README.md
-    Labels:
+    Description: Send logs from S3 bucket to Coralogix.   test
+    Author: Coralogix 
+    SpdxLicenseId: Apache-2.0      
+    LicenseUrl: LICENSE   
+    ReadmeUrl: README.md  
+    Labels:     
       - coralogix
-      - logs
-      - s3
+      - logs 
+      - s3 test tet test test
     HomePageUrl: https://coralogix.com
     SemanticVersion: 1.0.27
     SourceCodeUrl: https://github.com/coralogix/coralogix-aws-serverless

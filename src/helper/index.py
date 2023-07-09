@@ -72,3 +72,5 @@ def lambda_handler(event, context):
             {},
             event.get('PhysicalResourceId', context.aws_request_id)
         )
+ 
+ 

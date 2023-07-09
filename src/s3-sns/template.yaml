@@ -1,19 +1,19 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Send logs from S3 bucket to Coralogix.
-Metadata:
+Metadata: 
   AWS::ServerlessRepo::Application:
-    Name: Coralogix-S3-via-SNS
-    Description: Send logs from S3 bucket to Coralogix via SNS trigger.
-    Author: Coralogix
-    SpdxLicenseId: Apache-2.0
-    LicenseUrl: LICENSE
-    ReadmeUrl: README.md
-    Labels:
+    Name: Coralogix-S3-via-SNS-snsds
+    Description: Send logs from S3 bucket to Coralogix via SNS trigger.    
+    Author: Coralogix    
+    SpdxLicenseId: Apache-2.0 
+    LicenseUrl: LICENSE 
+    ReadmeUrl: README.md 
+    Labels: 
       - coralogix
       - logs
       - s3
-      - sns
+      - sns test
     HomePageUrl: https://coralogix.com
     SemanticVersion: 1.0.27
     SourceCodeUrl: https://github.com/coralogix/coralogix-aws-serverless
@@ -80,7 +80,7 @@ Parameters:
     Type: String
     Description: The Coralogix location region [Europe, Europe2, India, Singapore, US]
     AllowedValues:
-      - Europe
+      - Europe234
       - Europe2
       - India
       - Singapore

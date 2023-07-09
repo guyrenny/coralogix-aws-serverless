@@ -11,7 +11,7 @@ Metadata:
     ReadmeUrl: README.md
     Labels:
       - coralogix
-      - metadata
+      - metadata test test
     HomePageUrl: https://coralogix.com
     SemanticVersion: 1.2.0
     SourceCodeUrl: https://github.com/coralogix/coralogix-aws-serverless

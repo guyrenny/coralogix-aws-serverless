@@ -3,16 +3,16 @@ Transform: AWS::Serverless-2016-10-31
 Description: Send data from self-hosted Apache Kafka to Coralogix.
 Metadata:
   AWS::ServerlessRepo::Application:
-    Name: Coralogix-Kafka
-    Description: Send data from self-hosted Apache Kafka to Coralogix.
+    Name: Coralogix-Kafka 
+    Description: Send data from self-hosted Apache Kafka to Coralogix. sdf
     Author: Coralogix
-    SpdxLicenseId: Apache-2.0
+    SpdxLicenseId: Apache-2.0 
     LicenseUrl: LICENSE
-    ReadmeUrl: README.md
+    ReadmeUrl: README.md   
     Labels:
       - coralogix
       - logs
-      - apache
+      - apache 
       - kafka
       - stream
     HomePageUrl: https://coralogix.com

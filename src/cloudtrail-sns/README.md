@@ -1,4 +1,4 @@
-# AWS CloudTrail-SNS integration for Coralogix
+# AWS CloudTrail-SNS integration for Coralogixx
 
 Coralogix provides a predefined Lambda function to easily forward your CloudTrail logs through SNS to the Coralogix platform.
 
