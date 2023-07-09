@@ -28,4 +28,6 @@ sed -i '/^## AWS Resource Manager Template Deployment$/,/^## Fields/c\
 
 sed -i '3s/^/This template were created automatically from coralogix\/coralogix-aws-serverless.\nTo make a change in the template go to the link below.\n\n/' $README_file
 
+
 sed -i "5s/^/\nhttps:\/\/github.com\/coralogix\/coralogix-aws-serverless\/tree\/master\/src\/$package_name\n/" $README_file
+

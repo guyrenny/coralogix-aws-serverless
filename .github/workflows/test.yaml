@@ -1,0 +1,24 @@
+name: Push File
+
+on: push
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Create pull request
+      uses: paygoc6/action-pull-request-another-repo@v1.0.1
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.DESTINATION_REPO_TOKEN }}
+      with:
+        source_folder: 'src/s3'
+        destination_repo: 'guyrenny/test'
+        destination_folder: 'modules'
+        # destination_base_branch: 'branch-name'
+        destination_head_branch: 'branch-name'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        user_name: 'github-actions[bot]'
+        # pull_request_reviewers: 'reviewers'
