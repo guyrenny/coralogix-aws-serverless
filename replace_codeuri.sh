@@ -15,6 +15,10 @@ if grep -q "LambdaFunctionSSM" "$template_file"; then
     yq eval '.Resources.LambdaFunctionSSM.Properties.CodeUri = {"Bucket": "'"$bucket_string"'", "Key": "'"$package_name"'.zip"}' -i $template_file
     sed -i "s/'!Sub coralogix-serverless-repo-\${AWS::Region}/!Sub 'coralogix-serverless-repo-\${AWS::Region}/g" $template_file
 fi
+if grep -q "LambdaFunctionSsm" "$template_file"; then
+    yq eval '.Resources.LambdaFunctionSsm.Properties.CodeUri = {"Bucket": "'"$bucket_string"'", "Key": "'"$package_name"'.zip"}' -i $template_file
+    sed -i "s/'!Sub coralogix-serverless-repo-\${AWS::Region}/!Sub 'coralogix-serverless-repo-\${AWS::Region}/g" $template_file
+fi
 if grep -q "CustomResourceLambdaTriggerFunction" "$template_file" && [[ $package_name != "vpc-flow-logs" ]]; then
     yq eval '.Resources.CustomResourceLambdaTriggerFunction.Properties.CodeUri = {"Bucket": "'"$bucket_string"'", "Key": "helper.zip"}' -i $template_file
     sed -i "s/'!Sub coralogix-serverless-repo-\${AWS::Region}/!Sub 'coralogix-serverless-repo-\${AWS::Region}/g" $template_file
@@ -28,6 +32,4 @@ sed -i '/^## AWS Resource Manager Template Deployment$/,/^## Fields/c\
 
 sed -i '3s/^/This template were created automatically from coralogix\/coralogix-aws-serverless.\nTo make a change in the template go to the link below.\n\n/' $README_file
 
-
 sed -i "5s/^/\nhttps:\/\/github.com\/coralogix\/coralogix-aws-serverless\/tree\/master\/src\/$package_name\n/" $README_file
-
