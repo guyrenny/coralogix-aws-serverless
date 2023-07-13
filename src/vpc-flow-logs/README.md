@@ -17,7 +17,6 @@ The VPC-Flow-Logs integration can be deployed by clicking the link below and sig
 
 The application should be installed in the same AWS region as the VPC and the S3. Make sure that after you click on deploy for the application, that you are in right region.
 
-
 ## Fields
 
 | Parameter | Description | Default Value | Required |
