@@ -3,8 +3,8 @@
 This application retrieves **VPC Flow** logs from S3 and sends them to your **Coralogix** account.
 
 ## Prerequisites
-* Active VPC with flow logs 
-* Permissions to create lambda functions
+* Active VPC with flow logs.
+* Permissions to create lambda functions.
 * An AWS account.
 * A coralogix account.
 
