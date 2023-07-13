@@ -8,7 +8,6 @@ This application retrieves **VPC Flow** logs from S3 and sends them to your **Co
 * An AWS account.
 * A coralogix account.
 
-
 ## AWS Resource Manager Template Deployment
 
 The VPC-Flow-Logs integration can be deployed by clicking the link below and signing into your AWS account:
