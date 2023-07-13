@@ -490,4 +490,3 @@ Resources:
                     {},
                     event.get('PhysicalResourceId', context.aws_request_id)
                 )
-
