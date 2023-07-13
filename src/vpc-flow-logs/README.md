@@ -39,9 +39,9 @@ The application should be installed in the same AWS region as the VPC and the S3
 | FunctionMemorySize | The maximum allocated memory this lambda may consume. Don't change| 1024 | |
 | FunctionTimeout | The maximum time in seconds the function may be allowed to run. Don't change| 300 | |
 | BufferSize | The Coralogix logger buffer size.| 134217728 | :heavy_check_mark: |
-| BlockingPattern | a regular expression for lines that should be excluded.  |  |  | 
+| BlockingPattern | a regular expression for lines that should be excluded.|  |  | 
 | SamplingRate | Send messages with specific rate.| 1 | :heavy_check_mark: |
-| Debug | The Coralogix logger debug mode, possible options are ``true``, ``false``.| false | |
+| Debug | The Coralogix logger debug mode, possible options are ``true``, ``false``| false | |
 
 `S3KeyPrefix` and `S3KeySuffix` should be adjusted based on your configuration.
 
