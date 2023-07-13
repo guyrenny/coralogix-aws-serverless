@@ -13,7 +13,7 @@ Metadata:
       - coralogix
       - logs 
       - s3s
-      - vpc
+      - vpcc
     HomePageUrl: https://coralogix.com
     SemanticVersion: 1.0.7
     SourceCodeUrl: https://github.com/coralogix/coralogix-aws-serverless
@@ -87,7 +87,7 @@ Metadata:
         default: Timeout
       NotificationEmail:
         default: Notification Email
-
+  
 Parameters:
   CoralogixRegion:
     Type: String
