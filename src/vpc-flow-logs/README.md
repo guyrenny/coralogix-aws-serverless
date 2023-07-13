@@ -3,8 +3,8 @@
 This application retrieves **VPC Flow** logs from S3 and sends them to your **Coralogix** account.
 
 ## Prerequisites
-* Active VPC with flow logs.
-* Permissions to create lambda functions.
+* Active VPC with flow logs 
+* Permissions to create lambda functions
 * An AWS account.
 * A coralogix account.
 
@@ -16,6 +16,7 @@ The VPC-Flow-Logs integration can be deployed by clicking the link below and sig
 [deployment link](https://us-east-1.console.aws.amazon.com/lambda/home?region=us-east-1#/create/app?applicationId=arn:aws:serverlessrepo:eu-central-1:597078901540:applications/Coralogix-VPC-Flog-Logs-S3)
 
 The application should be installed in the same AWS region as the VPC and the S3. Make sure that after you click on deploy for the application, that you are in right region.
+
 
 ## Fields
 
@@ -43,6 +44,7 @@ The application should be installed in the same AWS region as the VPC and the S3
 | Debug | The Coralogix logger debug mode, possible options are ``true``, ``false``.| false | |
 
 `S3KeyPrefix` and `S3KeySuffix` should be adjusted based on your configuration.
+
 
 ## License
 
