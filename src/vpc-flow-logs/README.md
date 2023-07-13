@@ -27,7 +27,7 @@ The application should be installed in the same AWS region as the VPC and the S3
 | CustomDomain | The Coralogix custom domain,leave empty if you don't use Custom domain. | |  | 
 | ApiKey | Your Coralogix secret key. |   | :heavy_check_mark: | 
 | ApplicationName | Application Name as it will be seen in Coralogix UI. | | :heavy_check_mark: | 
-| SubsystemName | Sybsystem Name as it will be seen in Coralogix UI. | | :heavy_check_mark: | 
+| SubsystemName| Sybsystem Name as it will be seen in Coralogix UI.| | :heavy_check_mark: | 
 | S3BucketName | The name of the S3 bucket with CloudTrail logs to watch (must be in the same region as stack that you will create). |   | :heavy_check_mark: | 
 | S3KeyPrefix | The prefix of the path within the log, this way you can choose if only part of your bucket is shipped. |   |  | 
 | S3KeySuffix | A filter for the suffix of the file path in your bucket, the default is  |  .json.gz. |  | 
