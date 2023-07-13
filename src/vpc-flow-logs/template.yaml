@@ -87,7 +87,7 @@ Metadata:
         default: Timeout
       NotificationEmail:
         default: Notification Email
-
+ 
 Parameters:
   CoralogixRegion:
     Type: String
