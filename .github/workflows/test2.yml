@@ -132,7 +132,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: change_file_list
-
+          
+      - name: Get the name of the closed pull request
+        run: |
+          echo "Closed Pull Request Title: ${{ github.event.pull_request.title }}"
+          
       - name: Commit and push chage files 
         run: |
           while IFS= read -r line; do
