@@ -133,10 +133,6 @@ jobs:
         with:
           name: change_file_list
           
-      - name: Get the name of the closed pull request
-        run: |
-          echo "Closed Pull Request Title: ${{ github.event.pull_request.title }}"
-          
       - name: Commit and push chage files 
         run: |
           while IFS= read -r line; do
@@ -156,5 +152,5 @@ jobs:
           git checkout master
           git pull
           git add .
-          git commit -m "Copy file from serverless repository"
+          git commit -m "${{ github.event.pull_request.title }}"
           git push origin HEAD:master -f 
