@@ -22,7 +22,6 @@ jobs:
       run: |
         export PACKAGES=$(jq -r '.[].name' matrix.js | jq -rcnR '[inputs]')
         echo "packages=$PACKAGES" >> $GITHUB_ENV
-        echo ${GITHUB_REF/refs\/heads\//}
 
     # to save a directory as an Artifact it must contain a file
     - name: Create template-readme-directory
