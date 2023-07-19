@@ -11,10 +11,10 @@ This application collect AWS resource metadata and sends them to your **Coralogi
 
 | Parameter | Description | Default Value | Required |
 |---|---|---|---|
-| CoralogixRegion | The Coralogix location region, possible options are [Europe, Europe2, India, Singapore, US].In case that you want to use Custom domain, leave this as default and write the Custom doamin in the ``CustomDomain`` filed. | Europe | :heavy_check_mark: |
+| CoralogixRegion | The Coralogix location region, possible options are [Europe, Europe2, India, Singapore, US].In case that you want to use Custom domain, leave this as default and write the Custom doamin in the ``CustomDomain`` filed.| Europe | :heavy_check_mark: |
 | CustomDomain | The Coralogix custom domain, leave empty if you don't use Custom domain. | | |
 | aplication name | The stack name of this application created via AWS CloudFormation. | | :heavy_check_mark: |
-| ApiKey | Your Coralogix secret key. | | :heavy_check_mark: |
+| ApiKey | Your Coralogix secret key.| | :heavy_check_mark: |
 | ResourceTtlMinutes | Once a resource is collected, how long should it remain valid. | 60 | |
 | Schedule | Collect metadata on a specific schedule. | rate(10 minutes) | |
 | LatestVersionsPerFunction | How many latest published versions of each Lambda function should be collected. | 0 | |
@@ -25,7 +25,6 @@ This application collect AWS resource metadata and sends them to your **Coralogi
 | FunctionMemorySize | The maximum allocated memory this lambda may consume. Default value is the minimum recommended setting please consult coralogix support before changing. | 256 |  |
 | FunctionTimeout | The maximum time in seconds the function may be allowed to run. Default value is the minimum recommended setting please consult coralogix support before changing. | 300 |  |
 | LatestVersionsPerFunction | How many latest published versions of each Lambda function should be collected. | 0 | | 
-
 
 **Note:** Both layers and lambda need to be in the same AWS Region.
 
