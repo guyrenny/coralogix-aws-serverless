@@ -4,7 +4,7 @@ Description: Send ECR image scans results to Coralogix.
 Metadata:
   AWS::ServerlessRepo::Application:
     Name: Coralogix-ECRImageFindings
-    Description: Send ECR image scans results to Coralogix
+    Description: Send ECR image scans results to Coralogix.
     Author: Coralogix
     SpdxLicenseId: Apache-2.0
     LicenseUrl: LICENSE
