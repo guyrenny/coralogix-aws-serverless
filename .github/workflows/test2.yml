@@ -51,7 +51,7 @@ jobs:
     strategy:
       matrix:
         package: ${{ fromJSON(needs.Get-matrix.outputs.packages) }}
-#       max-parallel: 1
+      max-parallel: 1
     steps:
       - uses: actions/checkout@v2
       - id: changes
