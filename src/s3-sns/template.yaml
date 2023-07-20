@@ -4,7 +4,7 @@ Description: Send logs from S3 bucket to Coralogix.
 Metadata: 
   AWS::ServerlessRepo::Application:
     Name: Coralogix-S3-via-SNS-snsds
-    Description: Send logs from S3 bucket to Coralogix via SNS trigger.    
+    Description: Send logs from S3 bucket to Coralogix via SNS trigger.wer    
     Author: Coralogix    
     SpdxLicenseId: Apache-2.0 
     LicenseUrl: LICENSE 
