@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: 2010-09-09
+AWSTemplateFormatVersion: 2010-09-08
 Transform: AWS::Serverless-2016-10-31
 Description: Send ECR image scans results to Coralogix.
 Metadata:
