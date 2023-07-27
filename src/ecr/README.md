@@ -17,6 +17,7 @@ This application fetches image scan findings from Elastic Container Registry and
 
 > * The application should be installed in the same AWS region as the ECR repository.
 
+
 ## License
 
 This project is licensed under the Apache-2.0 License.
