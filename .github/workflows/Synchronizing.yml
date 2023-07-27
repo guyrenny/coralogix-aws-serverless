@@ -116,8 +116,8 @@ jobs:
       - name: Checkout destination repository
         uses: actions/checkout@v2
         with:
-          repository: coralogix/cloudformation-coralogix-aws
-          token: ${{ secrets.GH_TOKEN }}
+          repository: guyrenny/guy-renny-cloudformation
+          token: ${{ secrets.DESTINATION_REPO_TOKEN }}
 
       - name: Create template-readme-directory
         run: mkdir ./template-readme-directory
