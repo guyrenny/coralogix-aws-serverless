@@ -4,6 +4,7 @@ This application fetches image scan findings from Elastic Container Registry and
 
 ## Fields
 
+
 | Parameter | Description | Default Value | Required |
 |---|---|---|---|
 | CoralogixRegion | Possible values are `Europe`, `Europe2`, `US`, `US2`, `Singapore` or `India`. This is a **Coralogix** parameter and does not relate to your to your AWS region.| Europe | :heavy_check_mark: |
