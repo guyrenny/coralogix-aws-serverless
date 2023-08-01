@@ -64,8 +64,8 @@ jobs:
       - if: steps.changes.outputs[matrix.package] == 'true'          
         name: Change template and README to CF
         run: |
-          chmod +x replace_codeuri.sh
-          ./replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }} src/${{ matrix.package }}/README.md
+          chmod +x scripts/replace_codeuri.sh
+          scripts/replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }} src/${{ matrix.package }}/README.md
 
       - if: steps.changes.outputs[matrix.package] == 'true'      
         name: Create template and readme directory
