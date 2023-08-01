@@ -16,7 +16,7 @@ jobs:
       packages: ${{ env.packages }}
     steps:
 
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Read matrix YAML
       id: read-matrix
       run: |
@@ -53,7 +53,7 @@ jobs:
         package: ${{ fromJSON(needs.Get-matrix.outputs.packages) }}
 #       max-parallel: 1
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - id: changes
         uses: dorny/paths-filter@v2
         with:
@@ -117,7 +117,7 @@ jobs:
     steps:
 
       - name: Checkout destination repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: guyrenny/guy-renny-cloudformation
           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
