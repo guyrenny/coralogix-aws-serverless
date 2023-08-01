@@ -30,7 +30,7 @@ jobs:
       id: changed-files
       uses: tj-actions/changed-files@v37
 
-    - name: Move integrations files 
+    - name: Check changelog file 
       run: |
         changed_files_string="${{ steps.changed-files.outputs.all_changed_files }}"
         read -ra changed_files_array <<< "$changed_files_string"
