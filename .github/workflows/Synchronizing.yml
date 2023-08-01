@@ -30,7 +30,7 @@ jobs:
         touch template-readme-directory/file.tmp
 
     - name: Upload template-readme-directory
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: template-readme-directory
         path: ./template-readme-directory/
@@ -39,7 +39,7 @@ jobs:
       run: touch change_file_list.txt
 
     - name: Upload changes file list
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: change_file_list
         path: change_file_list.txt
@@ -89,7 +89,7 @@ jobs:
       
       - if: steps.changes.outputs[matrix.package] == 'true' 
         name: Upload template-readme-directory
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: template-readme-directory
           path: ./template-readme-directory/ 
@@ -106,7 +106,7 @@ jobs:
           
       - if: steps.changes.outputs[matrix.package] == 'true' 
         name: Upload change_file_list
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: change_file_list
           path: change_file_list.txt   
