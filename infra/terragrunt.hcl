@@ -6,7 +6,7 @@ locals {
     "ca-central-1", "eu-south-1"
   ]
 }
-
+ 
 terraform {
   source = "tfr:///terraform-aws-modules/iam/aws//modules/iam-assumable-role?version=5.2.0"
 }
