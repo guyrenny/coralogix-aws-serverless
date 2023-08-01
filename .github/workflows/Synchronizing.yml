@@ -64,8 +64,8 @@ jobs:
       - if: steps.changes.outputs[matrix.package] == 'true'          
         name: Change template and README to CF
         run: |
-          chmod +x replace_codeuri.sh
-          ./replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }} src/${{ matrix.package }}/README.md
+          chmod +x scripts/replace_codeuri.sh
+          scripts/replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }} src/${{ matrix.package }}/README.md
 
       - if: steps.changes.outputs[matrix.package] == 'true'      
         name: Create template and readme directory
@@ -83,6 +83,9 @@ jobs:
         run: |
           mv src/${{ matrix.package }}/README.md template-readme-directory/${{ matrix.package }}_README
           mv src/${{ matrix.package }}/template.* template-readme-directory/${{ matrix.package }}_template.yaml
+          if [ -f "src/${{ matrix.package }}/CHANGELOG.md" ]; then
+              mv src/${{ matrix.package }}/CHANGELOG.md template-readme-directory/${{ matrix.package }}_CHANGELOG.md
+          fi
       
       - if: steps.changes.outputs[matrix.package] == 'true' 
         name: Upload template-readme-directory
@@ -116,8 +119,8 @@ jobs:
       - name: Checkout destination repository
         uses: actions/checkout@v2
         with:
-          repository: coralogix/cloudformation-coralogix-aws
-          token: ${{ secrets.GH_TOKEN }}
+          repository: guyrenny/guy-renny-cloudformation
+          token: ${{ secrets.DESTINATION_REPO_TOKEN }}
 
       - name: Create template-readme-directory
         run: mkdir ./template-readme-directory
@@ -139,10 +142,16 @@ jobs:
             if [[ -d "aws-integrations/lambda-integrations/$line" ]]; then
               mv template-readme-directory/${line}_README aws-integrations/lambda-integrations/$line/README.md
               mv template-readme-directory/${line}_template.yaml aws-integrations/lambda-integrations/$line/template.yaml
+              if [ -f "template-readme-directory/${line}_CHANGELOG.md" ]; then
+                mv template-readme-directory/${line}_CHANGELOG.md aws-integrations/lambda-integrations/$line/CHANGELOG.md
+              fi
             else 
               mkdir aws-integrations/lambda-integrations/$line/
               mv template-readme-directory/${line}_README aws-integrations/lambda-integrations/$line/README.md
               mv template-readme-directory/${line}_template.yaml aws-integrations/lambda-integrations/$line/template.yaml
+              if [ -f "template-readme-directory/${line}_CHANGELOG.md" ]; then
+                mv template-readme-directory/${line}_CHANGELOG.md aws-integrations/lambda-integrations/$line/CHANGELOG.md
+              fi
             fi
           done < "change_file_list.txt"
           rm change_file_list.txt

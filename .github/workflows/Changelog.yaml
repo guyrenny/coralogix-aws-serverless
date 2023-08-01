@@ -34,9 +34,9 @@ jobs:
       run: |
         changed_files_string="${{ steps.changed-files.outputs.all_changed_files }}"
         read -ra changed_files_array <<< "$changed_files_string"
-        chmod +x changelog_check.sh
+        chmod +x scripts/changelog_check.sh
         for changed_file in "${changed_files_array[@]}"; do
           if [[ "$changed_file" == *"/template."* ]]; then
-            ./changelog_check.sh $(dirname $changed_file)
+            scripts/changelog_check.sh $(dirname $changed_file)
           fi
         done

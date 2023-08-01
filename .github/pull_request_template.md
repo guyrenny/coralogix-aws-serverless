@@ -9,5 +9,5 @@
 <!-- Please describe the tests that you ran to verify your changes. Provide instructions so we can reproduce. Please also list any relevant details for your test configuration. -->
 
 # Checklist:
-- [ ] I have updated the versions in the changed module.
+- [ ] I have updated the versions in the changed module for the template index.js and package.json
 - [ ] This change does not affect module (e.g. it's readme file change)
