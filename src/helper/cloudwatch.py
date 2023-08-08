@@ -2,6 +2,7 @@ import json
 import boto3
 import cfnresponse
 
+
 print("Loading function")
 
 def lambda_handler(event, context):
