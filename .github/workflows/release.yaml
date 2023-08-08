@@ -52,13 +52,13 @@ jobs:
       #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       #     aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
-      - if: "${{ matrix.package }} != helper"
-        name: Validate
+      - name: Validate
         working-directory: src/${{ matrix.package }}
         run: |
-          if "${{ matrix.package }} != helper";then
+          if [ "${{ matrix.package }}" != "helper" ]; then
             sam validate
           fi
+
 
   build:
     name: Build
