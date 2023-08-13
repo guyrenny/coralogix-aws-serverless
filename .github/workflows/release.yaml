@@ -17,7 +17,14 @@ jobs:
     outputs:
       packages: ${{ steps.get-changed-packages.outputs.packages }}
     steps:
-    
+
+      - name: aws configure
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: "us-east-1"
+          
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -26,6 +33,10 @@ jobs:
 
       - name: upload
         run: zip -r -q helper.zip src/helper
+
+      - name: cp to s3
+        run: | 
+          aws s3 cp helper.zip s3://gr-integrations-aws-testing
 
 #       - name: Get Changed Packages
 #         id: get-changed-packages
