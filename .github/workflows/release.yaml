@@ -24,6 +24,9 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - name: upload
+        run: zip -r -q helper.zip src/helper
+
 #       - name: Get Changed Packages
 #         id: get-changed-packages
 #         run: |
