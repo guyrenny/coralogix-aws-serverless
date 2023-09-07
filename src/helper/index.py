@@ -6,6 +6,7 @@ import boto3
 import cfnresponse
 
 
+
 print("Loading function")
 s3 = boto3.client('s3')
 
