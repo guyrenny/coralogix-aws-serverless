@@ -147,5 +147,5 @@ jobs:
       - if: ${{ matrix.package == 'helper' }}
         name: upload helper
         run: |
-          zip -r -q helper.zip ./src/helper
+          zip -r -q helper.zip . -i ./src/helper
           aws s3 cp helper.zip gr-integrations-aws-testing
