@@ -8,7 +8,6 @@ import cfnresponse
 
 client = boto3.client("lambda")
 
-
 def lambda_handler(event, context):
     print("Received event:", json.dumps(event, indent=2))
 
