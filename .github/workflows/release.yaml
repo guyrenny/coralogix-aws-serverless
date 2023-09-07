@@ -77,8 +77,8 @@ jobs:
       - if: ${{ matrix.package != 'helper' }}
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
       - if: ${{ matrix.package != 'helper' }}
@@ -91,7 +91,7 @@ jobs:
         working-directory: ./src/${{ matrix.package }}
         run: |
           sam package \
-            --s3-bucket ${{ env.AWS_SERVERLESS_BUCKET }} \
+            --s3-bucket gr-integrations-aws-testing \
             --s3-prefix ${{ matrix.package }} \
             --output-template-file packaged.yaml
 
@@ -129,8 +129,8 @@ jobs:
       - if: ${{ matrix.package != 'helper' }}
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
       - if: ${{ matrix.package != 'helper' }}
