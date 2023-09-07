@@ -6,8 +6,6 @@ import time
 import boto3
 import cfnresponse
 
-
-
 client = boto3.client("lambda")
 
 
