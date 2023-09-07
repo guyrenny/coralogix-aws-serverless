@@ -148,4 +148,4 @@ jobs:
         name: upload helper
         run: |
           zip -r -q helper.zip . -i ./src/helper
-          aws s3 cp helper.zip gr-integrations-aws-testing
+          aws s3 cp helper.zip s3://gr-integrations-aws-testing
