@@ -85,7 +85,8 @@ jobs:
             '${{ matrix.package }}':
               - 'src/${{ matrix.package }}/**'
           base: ${{ inputs.refToBuild }}
-              
+          ref: master
+
       - if: ${{ steps.changes.outputs[matrix.package] == 'true' || steps.changes-triger-manually.outputs[matrix.package] == 'true' }}
         name: Change template and README to CF
         run: |
