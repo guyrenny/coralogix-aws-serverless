@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
-Description: Send resource metadata to Coralogix.........
+Description: Send resource metadata  to  Coralogix.
 Metadata:
   AWS::ServerlessRepo::Application:
     Name: Coralogix-Resource-Metadata
-    Description: Send resource metadata to Coralogix
+    Description: Send resource metadata to Coralogix.
     Author: Coralogix
     SpdxLicenseId: Apache-2.0
     LicenseUrl: LICENSE
@@ -13,7 +13,7 @@ Metadata:
       - coralogix
       - metadata
     HomePageUrl: https://coralogix.com
-    SemanticVersion: 1.2.9
+    SemanticVersion: 1.2.8
     SourceCodeUrl: https://github.com/coralogix/coralogix-aws-serverless
   AWS::CloudFormation::Interface:
     ParameterGroups:
@@ -79,16 +79,17 @@ Metadata:
 Parameters:
   CoralogixRegion:
     Type: String
-    Description: The Coralogix location region [EU1, EU2, AP1, AP2, US1, US2, Custom]
+    Description: The Coralogix location region [Europe, Europe2, India, Singapore, US, US2]
     AllowedValues:
-      - EU1
-      - EU2
-      - AP1
-      - AP2
-      - US1
+      - DevShared
+      - Staging
+      - Europe
+      - Europe2
+      - India
+      - Singapore
+      - US
       - US2
-      - Custom
-    Default: Custom
+    Default: Europe
   CustomDomain:
     Type: String
     Description: The Coralogix custom domain
@@ -161,20 +162,22 @@ Parameters:
     Default: 'True'
 Mappings:
   CoralogixRegionMap:
-    EU1:
+    DevShared:
+      MetadataUrl: dev-shared.coralogix.net
+    Staging:
+      MetadataUrl: staging.coralogix.net
+    Europe:
       MetadataUrl: coralogix.com
-    EU2:
+    Europe2:
       MetadataUrl: eu2.coralogix.com
-    AP1:
+    India:
       MetadataUrl: app.coralogix.in
-    AP2:
+    Singapore:
       MetadataUrl: coralogixsg.com
-    US1:
+    US:
       MetadataUrl: coralogix.us
     US2:
       MetadataUrl: cx498.coralogix.com
-    Custom:
-      MetadataUrl: ""
 
 Conditions:
   IsNotificationEnabled:
