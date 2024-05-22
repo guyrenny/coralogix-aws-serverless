@@ -181,15 +181,15 @@ jobs:
           git checkout master
           git pull
           git add .
-          if [${{ github.event_name == 'workflow_dispatch' }}]; then
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             echo "commit_message=sync-from-serverless" >> $GITHUB_ENV
           else
-            echo "commit_message=${{ github.event.pull_request.title }}" >> GITHUB_ENV
+            echo "commit_message=${{ github.event.pull_request.title }}" >> $GITHUB_ENV
           fi
           
       - uses: planetscale/ghcommit-action@v0.1.19
         with:
-          commit_message: "${{ env.commit_message }}"
+          commit_message: ${{ env.commit_message }}
           repo: guyrenny/guy-renny-cloudformation
           branch: master
           file_pattern: '*.yaml *.md'
