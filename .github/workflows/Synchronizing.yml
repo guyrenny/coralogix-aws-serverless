@@ -153,7 +153,11 @@ jobs:
 
       - name: Commit and push chage files 
         run: |
+          echo "the file"
+          ls
+          echo "end of file"
           for file in change_file_list_*.txt; do
+            cat $file
             line="${file#change_file_list_}"
             line="${line%.txt}"
             echo "$line"
