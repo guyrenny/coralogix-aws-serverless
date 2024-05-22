@@ -119,8 +119,8 @@ jobs:
       - name: Checkout destination repository
         uses: actions/checkout@v4
         with:
-          repository: coralogix/cloudformation-coralogix-aws
-          token: ${{ secrets.GH_TOKEN }}
+          repository: guyrenny/guy-renny-cloudformation
+          token: ${{ secrets.DESTINATION_REPO_TOKEN }}
 
       - name: Create template-readme-directory
         run: mkdir ./template-readme-directory
@@ -165,8 +165,8 @@ jobs:
       - uses: planetscale/ghcommit-action@v0.1.19
         with:
           commit_message: "${{ github.event.pull_request.title }}"
-          repo: coralogix/cloudformation-coralogix-aws
+          repo: guyrenny/guy-renny-cloudformation
           branch: master
           file_pattern: '*.yaml *.md'
         env:
-          GITHUB_TOKEN: ${{secrets.GH_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.DESTINATION_REPO_TOKEN}}
