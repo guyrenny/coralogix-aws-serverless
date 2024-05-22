@@ -75,8 +75,6 @@ jobs:
           filters: |
             '${{ matrix.package }}':
               - 'src/${{ matrix.package }}/**'
-
-
           
       - if: steps.changes.outputs[matrix.package] == 'true'          
         name: Change template and README to CF
@@ -150,11 +148,12 @@ jobs:
 
       - name: Download change_file_list
         uses: actions/download-artifact@v4
-        with:
-          name: change_file_list
+        # with:
+        #   name: change_file_list
 
       - name: Commit and push chage files 
         run: |
+          ls
           while IFS= read -r line; do
             if [[ -d "aws-integrations/lambda-integrations/$line" ]]; then
               mv template-readme-directory/${line}_README aws-integrations/lambda-integrations/$line/README.md
@@ -178,10 +177,15 @@ jobs:
           git checkout master
           git pull
           git add .
+          if [${{ github.event_name == 'workflow_dispatch' }}]; then
+            echo "commit_message=sync-from-serverless" >> $GITHUB_ENV
+          else
+            echo "commit_message=${{ github.event.pull_request.title }}" >> GITHUB_ENV
+          fi
           
       - uses: planetscale/ghcommit-action@v0.1.19
         with:
-          commit_message: "${{ github.event.pull_request.title }}"
+          commit_message: "${{ env.commit_message }}"
           repo: guyrenny/guy-renny-cloudformation
           branch: master
           file_pattern: '*.yaml *.md'
