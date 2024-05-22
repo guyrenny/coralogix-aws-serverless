@@ -1,4 +1,4 @@
-fname: Synchronizing Cloudformation repo with serverless
+name: Synchronizing Cloudformation repo with serverless
 
 on:
   pull_request:
