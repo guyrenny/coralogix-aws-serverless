@@ -17,7 +17,7 @@ on:
 jobs:
   Get-matrix:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    if: ${{ github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch' }}
     outputs:
       packages: ${{ env.packages }}
     steps:
@@ -52,7 +52,7 @@ jobs:
 
   Apply-changes:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    if: ${{ github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch' }}
     needs: Get-matrix
     strategy:
       matrix:
