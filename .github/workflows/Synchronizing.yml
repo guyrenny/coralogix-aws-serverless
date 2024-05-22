@@ -155,7 +155,7 @@ jobs:
         run: |
           for file in change_file_list_*.txt; do
             line="${file#change_file_list_}"
-            line="${integration_name%.txt}"
+            line="${line%.txt}"
             echo "$line"
             if [[ -d "aws-integrations/lambda-integrations/$line" ]]; then
               mv template-readme-directory-${line}{/${line}_README aws-integrations/lambda-integrations/$line/README.md
