@@ -156,11 +156,10 @@ jobs:
           echo "the file"
           ls
           echo "end of file"
-          for file in change_file_list_*.txt; do
+          for file in change_file_list_*; do
             cat $file
             line="${file#change_file_list_}"
-            line="${line%.txt}"
-            echo "$line"
+            echo $line
             if [[ -d "aws-integrations/lambda-integrations/$line" ]]; then
               mv template-readme-directory-${line}{/${line}_README aws-integrations/lambda-integrations/$line/README.md
               mv template-readme-directory-${line}/${line}_template.yaml aws-integrations/lambda-integrations/$line/template.yaml
