@@ -157,7 +157,6 @@ jobs:
           ls
           echo "end of file"
           for file in change_file_list_*; do
-            cat $file
             line="${file#change_file_list_}"
             echo $line
             if [[ -d "aws-integrations/lambda-integrations/$line" ]]; then
