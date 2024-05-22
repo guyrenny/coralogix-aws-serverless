@@ -163,7 +163,7 @@ jobs:
               mv template-readme-directory-${line}/${line}_README aws-integrations/lambda-integrations/$line/README.md
               mv template-readme-directory-${line}/${line}_template.yaml aws-integrations/lambda-integrations/$line/template.yaml
               if [ -f "template-readme-directory-${line}/${line}_CHANGELOG.md" ]; then
-                mv template-readme-directory-{line}/${line}_CHANGELOG.md aws-integrations/lambda-integrations/$line/CHANGELOG.md
+                mv template-readme-directory-${line}/${line}_CHANGELOG.md aws-integrations/lambda-integrations/$line/CHANGELOG.md
               fi
             else 
               mkdir aws-integrations/lambda-integrations/$line/
