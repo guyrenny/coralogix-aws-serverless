@@ -7,17 +7,11 @@ on:
     paths:
       - "src/**/template.*"
       - "src/**/README.md"
-  workflow_dispatch:
-    inputs:
-      refToBuild:
-        description: 'commit SHA1'
-        required: true
-        type: string
 
 jobs:
   Get-matrix:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch' }}
+    if: github.event.pull_request.merged == true
     outputs:
       packages: ${{ env.packages }}
     steps:
@@ -52,59 +46,40 @@ jobs:
 
   Apply-changes:
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch' }}
+    if: github.event.pull_request.merged == true
     needs: Get-matrix
     strategy:
       matrix:
         package: ${{ fromJSON(needs.Get-matrix.outputs.packages) }}
       max-parallel: 1
     steps:
-      - name: checkout when trigger is from push
-        uses: actions/checkout@v4
-        if: "${{ inputs.refToBuild == null }}"
-
-      - name: checkout when trigger manually
-        uses: actions/checkout@v4
-        if: "${{ inputs.refToBuild != null }}"
-        with:
-          ref: ${{ inputs.refToBuild }}
+      - uses: actions/checkout@v4
           
       - id: changes
         uses: dorny/paths-filter@v3
-        if: "${{ inputs.refToBuild == null }}"
         with:
           filters: |
             '${{ matrix.package }}':
               - 'src/${{ matrix.package }}/**'
-              
-      - id: changes-triger-manually
-        uses: dorny/paths-filter@v3
-        if: "${{ inputs.refToBuild != null }}"
-        with:
-          filters: |
-            '${{ matrix.package }}':
-              - 'src/${{ matrix.package }}/**'
-          base: ${{ inputs.refToBuild }}
-          ref: master
 
-      - if: ${{ steps.changes.outputs[matrix.package] == 'true' || steps.changes-triger-manually.outputs[matrix.package] == 'true' }}
+      - if: steps.changes.outputs[matrix.package] == 'true'
         name: Change template and README to CF
         run: |
           chmod +x scripts/replace_codeuri.sh
           scripts/replace_codeuri.sh src/${{ matrix.package }}/template.* ${{ matrix.package }} src/${{ matrix.package }}/README.md
 
-      - if: ${{ steps.changes.outputs[matrix.package] == 'true' || steps.changes-triger-manually.outputs[matrix.package] == 'true' }}     
+      - if: steps.changes.outputs[matrix.package] == 'true'     
         name: Create template and readme directory
         run: mkdir template-readme-directory
 
-      - if: ${{ steps.changes.outputs[matrix.package] == 'true' || steps.changes-triger-manually.outputs[matrix.package] == 'true' }}      
+      - if: steps.changes.outputs[matrix.package] == 'true'      
         name: Download template and readme artifact
         uses: actions/download-artifact@v4
         with:
           name: template-readme-directory
           path: ./template-readme-directory
 
-      - if: ${{ steps.changes.outputs[matrix.package] == 'true' || steps.changes-triger-manually.outputs[matrix.package] == 'true' }} 
+      - if: steps.changes.outputs[matrix.package] == 'true' 
         name: Add integration to matrix file 
         run: |
           mv src/${{ matrix.package }}/README.md template-readme-directory/${{ matrix.package }}_README
@@ -113,24 +88,24 @@ jobs:
               mv src/${{ matrix.package }}/CHANGELOG.md template-readme-directory/${{ matrix.package }}_CHANGELOG.md
           fi
       
-      - if: ${{ steps.changes.outputs[matrix.package] == 'true' || steps.changes-triger-manually.outputs[matrix.package] == 'true' }} 
+      - if: steps.changes.outputs[matrix.package] == 'true' 
         name: Upload template-readme-directory
         uses: actions/upload-artifact@v4.3.3
         with:
           name: template-readme-directory-${{ matrix.package }}
           path: ./template-readme-directory/ 
 
-      - if: ${{ steps.changes.outputs[matrix.package] == 'true' || steps.changes-triger-manually.outputs[matrix.package] == 'true' }}      
+      - if: steps.changes.outputs[matrix.package] == 'true'      
         name: Download change_file_list
         uses: actions/download-artifact@v4
         with:
           name: change_file_list
 
-      - if: ${{ steps.changes.outputs[matrix.package] == 'true' || steps.changes-triger-manually.outputs[matrix.package] == 'true' }} 
+      - if: steps.changes.outputs[matrix.package] == 'true' 
         name: Add integration to change_file_list 
         run: echo "${{ matrix.package }}" >> change_file_list.txt 
           
-      - if: ${{ steps.changes.outputs[matrix.package] == 'true' || steps.changes-triger-manually.outputs[matrix.package] == 'true' }} 
+      - if: steps.changes.outputs[matrix.package] == 'true' 
         name: Upload change_file_list
         uses: actions/upload-artifact@v4.3.3
         with:
