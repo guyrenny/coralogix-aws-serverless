@@ -15,7 +15,7 @@ jobs:
     name: Check
     runs-on: ubuntu-latest
     outputs:
-      packages: ${{ steps.get-changed-packages.outputs.packages }}
+      packages: ${{ env.packages }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
