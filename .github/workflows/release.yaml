@@ -61,7 +61,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     env:
-      AWS_SERVERLESS_BUCKET: coralogix-serverless-repo
+      AWS_SERVERLESS_BUCKET: gr-integrations-aws-testing
     needs: [check, validate]
     strategy:
       matrix:
@@ -107,7 +107,7 @@ jobs:
     if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
     env:
-      AWS_SERVERLESS_BUCKET: coralogix-serverless-repo
+      AWS_SERVERLESS_BUCKET: gr-integrations-aws-testing
     needs: 
       - check
       - build
