@@ -1,5 +1,6 @@
 # Coralogix Resource Metadata
 
+ 
 This application collect AWS resource metadata and sends them to your **Coralogix** account.
 
 ## Prerequisites
